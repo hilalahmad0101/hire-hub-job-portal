@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\CompanyController;
 use App\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -23,5 +24,10 @@ Route::middleware(['web'])->name('web.')->group(function (): void {
         Route::get('company/reviews', 'reviews')->name('company.reviews');
         Route::get('company/add-review', 'addReview')->name('company.add-review');
         Route::get('company/benefit', 'benefit')->name('company.benefit');
+    });
+
+    Route::controller(AuthController::class)->group(function (): void {
+        Route::get('auth/register', 'register')->name('auth.register');
+        Route::get('auth/login', 'login')->name('auth.login');
     });
 });

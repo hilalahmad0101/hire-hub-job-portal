@@ -57,7 +57,7 @@
                         class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold transition-all hover:bg-blue-700">
                         Post a Job
                     </button>
-                    <button
+                    <button onclick="window.location.href='{{ route('web.auth.login') }}'"
                         class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-[#f0f2f4] dark:bg-gray-800 text-[#111418] dark:text-white text-sm font-bold transition-all hover:bg-gray-200 dark:hover:bg-gray-700">
                         Sign In
                     </button>
