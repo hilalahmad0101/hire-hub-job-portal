@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Employer\JobController;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\CompanyController;
 use App\Http\Controllers\Web\DashboardController;
+use App\Http\Controllers\Employer\DashboardController as EmployerDashboardController;
 use App\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,5 +48,14 @@ Route::middleware(['web'])->name('web.')->group(function (): void {
         Route::get('dashboard/change-password', 'changePassword')->name('dashboard.change-password');
         Route::get('dashboard/notification', 'notification')->name('dashboard.notification');
         Route::get('dashboard/message', 'message')->name('dashboard.message');
+    });
+
+    Route::controller(EmployerDashboardController::class)->group(function (): void {
+        Route::get('employer/dashboard', 'dashboard')->name('employer.dashboard');
+        Route::get('employer/company-profile', 'companyProfile')->name('employer.company-profile');
+    });
+
+    Route::controller(JobController::class)->group(function (): void {
+        Route::get('employer/job/list', 'index')->name('employer.job.list');
     });
 });
