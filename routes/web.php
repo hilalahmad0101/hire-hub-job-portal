@@ -57,5 +57,6 @@ Route::middleware(['web'])->name('web.')->group(function (): void {
 
     Route::controller(JobController::class)->group(function (): void {
         Route::get('employer/job/list', 'index')->name('employer.job.list');
+        Route::get('employer/job/post-job', 'postJob')->name('employer.job.post-job');
     });
 });

@@ -10,7 +10,7 @@
                 <h1 class="text-2xl font-bold text-slate-900 dark:text-white">Manage Jobs</h1>
                 <p class="text-slate-500 dark:text-slate-400">Track and manage your company's open positions.</p>
             </div>
-            <button
+            <button onclick="window.location.href = '{{ route('web.employer.job.post-job') }}'"
                 class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-medium inline-flex items-center gap-2 shadow-lg shadow-primary/20 transition-all">
                 <span class="material-icons text-sm">add</span>
                 Post New Job
