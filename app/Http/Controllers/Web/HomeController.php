@@ -48,4 +48,25 @@ class HomeController extends Controller
         return view('web.job.job-application-form');
     }
 
+    public function contact(): View
+    {
+        return view('web.contact');
+    }
+
+    public function faq(): View
+    {
+        return view('web.faq');
+    }
+
+    public function aboutUs(): View
+    {
+        return view('web.about');
+    }
+
+    public function candidateProfile(): View
+    {
+        return view('web.candidate-profile');
+    }
+
+
 }

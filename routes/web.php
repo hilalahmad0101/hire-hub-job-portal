@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\CompanyController;
+use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,10 @@ Route::middleware(['web'])->name('web.')->group(function (): void {
         Route::get('job/add-review', 'addReview')->name('add-review');
         Route::get('job/benefit', 'benefit')->name('benefit');
         Route::get('job/application-form', 'jobApplicationForm')->name('job.application-form');
+        Route::get('contact', 'contact')->name('contact');
+        Route::get('faq', 'faq')->name('faq');
+        Route::get('about-us', 'aboutUs')->name('about-us');
+        Route::get('candidate-profile', 'candidateProfile')->name('candidate-profile');
     });
 
     Route::controller(CompanyController::class)->group(function (): void {
@@ -29,5 +34,17 @@ Route::middleware(['web'])->name('web.')->group(function (): void {
     Route::controller(AuthController::class)->group(function (): void {
         Route::get('auth/register', 'register')->name('auth.register');
         Route::get('auth/login', 'login')->name('auth.login');
+        Route::get('auth/verify', 'verify')->name('auth.verify');
+    });
+
+    Route::controller(DashboardController::class)->group(function (): void {
+        Route::get('dashboard', 'dashboard')->name('dashboard');
+        Route::get('dashboard/profile', 'profile')->name('dashboard.profile');
+        Route::get('dashboard/cv-manager', 'cvManager')->name('dashboard.cv-manager');
+        Route::get('dashboard/applied-job', 'appliedJob')->name('dashboard.applied-job');
+        Route::get('dashboard/shortlisted', 'shortlisted')->name('dashboard.shortlisted');
+        Route::get('dashboard/change-password', 'changePassword')->name('dashboard.change-password');
+        Route::get('dashboard/notification', 'notification')->name('dashboard.notification');
+        Route::get('dashboard/message', 'message')->name('dashboard.message');
     });
 });

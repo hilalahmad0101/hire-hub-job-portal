@@ -50,6 +50,8 @@
                             href="{{ route('web.job.list') }}"> Job List</a>
                         <a class="text-[#111418] dark:text-gray-300 text-sm font-semibold hover:text-primary transition-colors"
                             href="{{ route('web.company.list') }}">Companies</a>
+                        <a class="text-[#111418] dark:text-gray-300 text-sm font-semibold hover:text-primary transition-colors"
+                            href="{{ route('web.contact') }}">Contact</a>
                     </nav>
                 </div>
                 <div class="flex items-center gap-3">
@@ -103,8 +105,12 @@
                 <div>
                     <h4 class="text-[#111418] dark:text-white font-bold mb-4">Company</h4>
                     <ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
-                        <li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="{{ route('web.about-us') }}">About
+                                Us</a>
+                        </li>
+                        <li><a class="hover:text-primary transition-colors"
+                                href="{{ route('web.contact') }}">Contact</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="{{ route('web.faq') }}">FAQ</a></li>
                         <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
                         <li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
                     </ul>

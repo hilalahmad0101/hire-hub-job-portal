@@ -17,4 +17,9 @@ class AuthController extends Controller
     {
         return view('web.auth.login');
     }
+
+    public function verify(): View
+    {
+        return view('web.auth.verify');
+    }
 }
