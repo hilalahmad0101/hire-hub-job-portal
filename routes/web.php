@@ -1,15 +1,15 @@
 <?php
 
+use App\Http\Controllers\Employer\DashboardController as EmployerDashboardController;
 use App\Http\Controllers\Employer\JobController;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\CompanyController;
 use App\Http\Controllers\Web\DashboardController;
-use App\Http\Controllers\Employer\DashboardController as EmployerDashboardController;
 use App\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['web'])->name('web.')->group(function (): void {
-    Route::controller(HomeController::class)->group(function (): void {
+    Route::controller(controller: HomeController::class)->group(function (): void {
         Route::get('/', 'index')->name('home');
         Route::get('job/list', 'list')->name('job.list');
         Route::get('job/job-detail', 'jobDetail')->name('job-detail');
@@ -34,9 +34,10 @@ Route::middleware(['web'])->name('web.')->group(function (): void {
     });
 
     Route::controller(AuthController::class)->group(function (): void {
-        Route::get('auth/register', 'register')->name('auth.register');
+        Route::get('auth/register', 'registerView')->name('auth.register.view');
+        Route::post('auth/register', 'register')->name('auth.register');
         Route::get('auth/login', 'login')->name('auth.login');
-        Route::get('auth/verify', 'verify')->name('auth.verify');
+        Route::get('auth/verify', 'verifyView')->name('auth.verify');
     });
 
     Route::controller(DashboardController::class)->group(function (): void {

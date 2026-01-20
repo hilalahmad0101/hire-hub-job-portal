@@ -118,7 +118,8 @@
                 <div class="mt-8 text-center">
                     <p class="text-sm text-gray-600 dark:text-gray-400 font-medium">
                         Don't have an account?
-                        <a class="text-primary font-bold hover:underline ml-1" href="{{ route('web.auth.register') }}">Sign
+                        <a class="text-primary font-bold hover:underline ml-1"
+                            href="{{ route('web.auth.register.view') }}">Sign
                             up for free</a>
                     </p>
                 </div>

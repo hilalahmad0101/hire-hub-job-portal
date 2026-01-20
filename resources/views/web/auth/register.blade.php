@@ -15,7 +15,7 @@
                                 fill="currentColor" fill-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h2 class="text-xl font-bold text-[#111118] dark:text-white leading-tight">JobPortal</h2>
+                    <h2 class="text-xl font-bold text-[#111118] dark:text-white leading-tight">{{ env('APP_NAME') }}</h2>
                 </div>
                 <!-- Headline -->
                 <div class="mb-8">
@@ -24,42 +24,71 @@
                     <p class="text-[#616189] dark:text-gray-400">Join 50,000+ professionals finding their dream jobs.</p>
                 </div>
                 <!-- Form Fields -->
-                <form class="space-y-5">
+                <form class="space-y-5" action="{{ route('web.auth.register') }}" method="post">
+                    @csrf
+
+                    {{-- select user type --}}
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-sm font-medium text-[#111118] dark:text-gray-200">User Type</label>
+                        <select
+                            class="w-full rounded-lg border border-[#dbdbe6] dark:border-gray-700 bg-white dark:bg-gray-800 p-3.5 text-base text-[#111118] dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-[#616189]"
+                            name="user_type">
+                            <option value="">Select User Type</option>
+                            <option value="employer">Employer</option>
+                            <option value="candidate">Candidate</option>
+                        </select>
+                        @error('user_type')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <!-- Full Name -->
                     <div class="flex flex-col gap-1.5">
                         <label class="text-sm font-medium text-[#111118] dark:text-gray-200">Full Name</label>
-                        <input
+                        <input name="name"
                             class="w-full rounded-lg border border-[#dbdbe6] dark:border-gray-700 bg-white dark:bg-gray-800 p-3.5 text-base text-[#111118] dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-[#616189]"
                             placeholder="John Doe" type="text" />
+                        @error('name')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
                     </div>
                     <!-- Email -->
                     <div class="flex flex-col gap-1.5">
                         <label class="text-sm font-medium text-[#111118] dark:text-gray-200">Email Address</label>
-                        <input
+                        <input name="email"
                             class="w-full rounded-lg border border-[#dbdbe6] dark:border-gray-700 bg-white dark:bg-gray-800 p-3.5 text-base text-[#111118] dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-[#616189]"
                             placeholder="email@example.com" type="email" />
+                        @error('email')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
                     </div>
                     <!-- Password Group -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="flex flex-col gap-1.5">
                             <label class="text-sm font-medium text-[#111118] dark:text-gray-200">Password</label>
                             <div class="relative">
-                                <input
+                                <input name="password"
                                     class="w-full rounded-lg border border-[#dbdbe6] dark:border-gray-700 bg-white dark:bg-gray-800 p-3.5 text-base text-[#111118] dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                                     placeholder="••••••••" type="password" />
                                 <span
                                     class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#616189] cursor-pointer text-xl">visibility</span>
                             </div>
+                            @error('password')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="flex flex-col gap-1.5">
                             <label class="text-sm font-medium text-[#111118] dark:text-gray-200">Confirm Password</label>
                             <div class="relative">
-                                <input
+                                <input name="password_confirmation"
                                     class="w-full rounded-lg border border-[#dbdbe6] dark:border-gray-700 bg-white dark:bg-gray-800 p-3.5 text-base text-[#111118] dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                                     placeholder="••••••••" type="password" />
                                 <span
                                     class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#616189] cursor-pointer text-xl">visibility</span>
                             </div>
+                            @error('password_confirmation')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <!-- Terms -->
@@ -80,9 +109,9 @@
                     </button>
                     <!-- Divider -->
                     <div class="relative flex items-center py-4">
-                        <div class="flex-grow border-t border-[#dbdbe6] dark:border-gray-700"></div>
-                        <span class="flex-shrink mx-4 text-sm text-[#616189] dark:text-gray-400">or sign up with</span>
-                        <div class="flex-grow border-t border-[#dbdbe6] dark:border-gray-700"></div>
+                        <div class="grow border-t border-[#dbdbe6] dark:border-gray-700"></div>
+                        <span class="shrink mx-4 text-sm text-[#616189] dark:text-gray-400">or sign up with</span>
+                        <div class="grow border-t border-[#dbdbe6] dark:border-gray-700"></div>
                     </div>
                     <!-- Social Buttons -->
                     <div class="grid grid-cols-2 gap-4">

@@ -2,6 +2,22 @@
 
 @section('title', 'Verification')
 
+@push('styles')
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+@endpush
+
 @section('content')
     <!-- Main Content Area -->
     <main class="flex-1 flex items-center justify-center p-6">
@@ -41,14 +57,6 @@
                     <input
                         class="flex h-14 w-12 md:w-14 text-center [appearance:textfield] focus:outline-0 focus:ring-2 focus:ring-primary/20 border-0 border-b-2 border-gray-200 dark:border-gray-700 bg-transparent dark:text-white text-2xl font-bold leading-normal transition-all focus:border-primary"
                         max="9" maxlength="1" min="0" type="number" />
-                    <!-- Digit 5 -->
-                    <input
-                        class="flex h-14 w-12 md:w-14 text-center [appearance:textfield] focus:outline-0 focus:ring-2 focus:ring-primary/20 border-0 border-b-2 border-gray-200 dark:border-gray-700 bg-transparent dark:text-white text-2xl font-bold leading-normal transition-all focus:border-primary"
-                        max="9" maxlength="1" min="0" type="number" />
-                    <!-- Digit 6 -->
-                    <input
-                        class="flex h-14 w-12 md:w-14 text-center [appearance:textfield] focus:outline-0 focus:ring-2 focus:ring-primary/20 border-0 border-b-2 border-gray-200 dark:border-gray-700 bg-transparent dark:text-white text-2xl font-bold leading-normal transition-all focus:border-primary"
-                        max="9" maxlength="1" min="0" type="number" />
                 </fieldset>
             </div>
             <!-- Action Button -->
@@ -79,3 +87,25 @@
         </div>
     </main>
 @endsection
+
+@push('scripts')
+    <script>
+        const inputs = document.querySelectorAll('input[type="number"]');
+
+        inputs.forEach((input, index) => {
+            // Handle typing a number
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            // Handle Backspace
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+    </script>
+@endpush
