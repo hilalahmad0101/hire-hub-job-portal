@@ -43,7 +43,7 @@ Route::middleware(['web'])->name('web.')->group(function (): void {
         Route::post('auth/resend/otp/{uuid}', 'resendOtp')->name('auth.resend.otp');
         Route::post('auth/change/email/{uuid}', 'changeEmail')->name('auth.change.email');
         Route::get('setup-company/{uuid}', 'setupCompanyView')->name('setup-company.view');
-        // Route::post('setup-company', 'setupCompany')->name('setup-company');
+        Route::post('setup-company/{uuid}', 'setupCompany')->name('setup-company');
         Route::post('auth/logout', 'logout')->name('auth.logout');
     });
 

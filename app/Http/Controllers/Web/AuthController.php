@@ -7,8 +7,10 @@ use App\Http\Requests\Auth\ChangeEmailRequest;
 use App\Http\Requests\Auth\EmailVerifyRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\CompanyProfile;
 use App\Services\AuthService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -147,6 +149,44 @@ class AuthController extends Controller
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
         }
+    }
+
+    public function setupCompany(Request $request, string $uuid)
+    {
+        $validated = $request->validate([
+            'company_name' => 'required|string|max:255',
+            'website_url' => 'nullable|url|max:255',
+            'industry' => 'nullable|string|max:255',
+            'company_size' => 'nullable|string|max:255',
+            'company_bio' => 'nullable|string|max:1000',
+            'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB
+            'logo_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // 2MB
+        ]);
+
+        $user = $this->authService->getUserByUuid($uuid);
+
+        $validated['user_id'] = $user->id;
+        $validated['uuid'] = str()->uuid();
+        $validated['slug'] = str()->slug($validated['company_name']);
+
+        // Handle banner image upload
+        if ($request->hasFile('banner_image')) {
+            $validated['banner_image'] = $request->file('banner_image')
+                ->store('company/banners', 'public');
+        }
+
+        // Handle logo image upload
+        if ($request->hasFile('logo_image')) {
+            $validated['logo_image'] = $request->file('logo_image')
+                ->store('company/logos', 'public');
+        }
+
+        CompanyProfile::create($validated);
+        $user->is_task_complete = true;
+        $user->save();
+        Auth::login($user);
+
+        return to_route('web.employer.dashboard')->with('success', 'Company profile created successfully!');
     }
 
     // logout with regenerate session
