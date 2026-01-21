@@ -77,11 +77,13 @@
                 </a>
             </nav>
             <div class="p-4 mt-auto">
-                <button
-                    class="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-[#617289] dark:text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors">
-                    <span class="material-symbols-outlined">logout</span>
-                    <span class="text-sm font-medium">Logout</span>
-                </button>
+                <x-web.form-wrapper action="{{ route('web.auth.logout') }}">
+                    <button type="submit"
+                        class="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-[#617289] dark:text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors">
+                        <span class="material-symbols-outlined">logout</span>
+                        <span class="text-sm font-medium">Logout</span>
+                    </button>
+                </x-web.form-wrapper>
             </div>
         </aside>
         <!-- Main Content Area -->

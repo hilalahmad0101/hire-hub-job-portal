@@ -59,9 +59,19 @@ class AuthController extends Controller
                 return back()->with('error', $login['message']);
             }
 
+            if ($user->user_type == 'employer') {
+                if ($user->is_task_complete) {
+                    Auth::login($user);
+
+                    return to_route('web.employer.dashboard')->with('success', $login['message']);
+                } else {
+                    return to_route('web.setup-company.view', ['uuid' => $user->uuid])->with('success', 'Complete company profile');
+                }
+            }
             Auth::login($user);
 
             return to_route('web.home')->with('success', $login['message']);
+
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
         }
@@ -126,5 +136,29 @@ class AuthController extends Controller
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
         }
+    }
+
+    public function setupCompanyView(string $uuid)
+    {
+        try {
+            $user = $this->authService->getUserByUuid($uuid);
+
+            return view('web.auth.setup-company', compact('user'));
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
+    // logout with regenerate session
+    public function logout()
+    {
+        session()->regenerate();
+
+        Auth::logout();
+
+        session()->regenerateToken();
+        session()->flush();
+
+        return to_route('web.auth.login.view');
     }
 }

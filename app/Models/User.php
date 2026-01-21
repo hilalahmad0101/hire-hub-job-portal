@@ -25,6 +25,7 @@ class User extends Authenticatable
         'code',
         'user_type',
         'uuid',
+        'is_task_complete',
     ];
 
     /**
