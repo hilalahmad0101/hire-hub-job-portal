@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Mail\UserVerification;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class AuthService
@@ -46,6 +47,7 @@ class AuthService
     {
         if ($user->code == $code) {
             $user->code = 0;
+            $user->isVerified = 1;
             $user->save();
 
             return true;
@@ -57,5 +59,27 @@ class AuthService
     public function getUserByUuid(string $uuid): User
     {
         return User::where('uuid', '=', $uuid)->firstOrFail();
+    }
+
+    public function login(User $user, string $password): array
+    {
+        if (! Hash::check($password, $user->password)) {
+            return [
+                'success' => false,
+                'message' => 'Invalid password',
+            ];
+        }
+        if ($user->isVerified == 0) {
+            return [
+                'success' => false,
+                'message' => 'Please verify your email',
+            ];
+        }
+
+        return [
+            'success' => true,
+            'message' => 'Login successful',
+            'user' => $user,
+        ];
     }
 }

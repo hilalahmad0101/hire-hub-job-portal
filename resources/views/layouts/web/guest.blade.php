@@ -55,14 +55,31 @@
                     </nav>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button
-                        class="flex min-w-21 cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold transition-all hover:bg-blue-700">
-                        Post a Job
-                    </button>
-                    <button onclick="window.location.href='{{ route('web.auth.login.view') }}'"
-                        class="flex min-w-21 cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-[#f0f2f4] dark:bg-gray-800 text-[#111418] dark:text-white text-sm font-bold transition-all hover:bg-gray-200 dark:hover:bg-gray-700">
-                        Sign In
-                    </button>
+                    @auth
+                        @if (auth()->user()->user_type == 'employer')
+                            <button
+                                class="flex min-w-21 cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold transition-all hover:bg-blue-700">
+                                Post a Job
+                            </button>
+
+                            <button onclick="window.location.href='{{ route('web.employer.dashboard') }}'"
+                                class="flex min-w-21 cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-[#f0f2f4] dark:bg-gray-800 text-[#111418] dark:text-white text-sm font-bold transition-all hover:bg-gray-200 dark:hover:bg-gray-700">
+                                Dashboard
+                            </button>
+                        @endif
+                        @if (auth()->user()->user_type == 'candidate')
+                            <button onclick="window.location.href='{{ route('web.dashboard') }}'"
+                                class="flex min-w-21 cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-[#f0f2f4] dark:bg-gray-800 text-[#111418] dark:text-white text-sm font-bold transition-all hover:bg-gray-200 dark:hover:bg-gray-700">
+                                Dashboard
+                            </button>
+                        @endif
+                    @endauth
+                    @guest
+                        <button onclick="window.location.href='{{ route('web.auth.login.view') }}'"
+                            class="flex min-w-21 cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-[#f0f2f4] dark:bg-gray-800 text-[#111418] dark:text-white text-sm font-bold transition-all hover:bg-gray-200 dark:hover:bg-gray-700">
+                            Sign In
+                        </button>
+                    @endguest
                 </div>
             </div>
         </header>
@@ -134,7 +151,8 @@
 
             {{-- 1. Success Message --}}
             @if (session('success'))
-                <x-toast-alert type="success" :message="session('success')" title="Success!" icon="check_circle" color="green" />
+                <x-toast-alert type="success" :message="session('success')" title="Success!" icon="check_circle"
+                    color="green" />
             @endif
 
             {{-- 2. Single Manual Error Message --}}

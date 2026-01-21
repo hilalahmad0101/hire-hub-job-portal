@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ChangeEmailRequest;
 use App\Http\Requests\Auth\EmailVerifyRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\AuthService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -43,6 +45,28 @@ class AuthController extends Controller
         return view('web.auth.login');
     }
 
+    // login
+    public function login(LoginRequest $request)
+    {
+        $validated = $request->validated();
+        try {
+            $user = $this->authService->getUserByEmail($validated['email']);
+            if (! $user) {
+                return back()->with('error', 'Invalid email or password');
+            }
+            $login = $this->authService->login($user, $validated['password']);
+            if (! $login['success']) {
+                return back()->with('error', $login['message']);
+            }
+
+            Auth::login($user);
+
+            return to_route('web.home')->with('success', $login['message']);
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
     public function verifyView(string $uuid): View|RedirectResponse
     {
         try {
@@ -76,6 +100,9 @@ class AuthController extends Controller
     {
         try {
             $user = $this->authService->getUserByUuid($uuid);
+            $rand = rand(1000, 9999);
+            $user->code = $rand;
+            $user->save();
             $this->authService->sendOtp($user);
 
             return back()->with('success', 'OTP sent successfully');

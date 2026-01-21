@@ -74,47 +74,60 @@
                     <span>Continue with Google</span>
                 </button>
                 <div class="relative flex items-center my-8">
-                    <div class="flex-grow border-t border-[#dbe0e6] dark:border-gray-700"></div>
-                    <span class="flex-shrink mx-4 text-gray-400 text-xs font-medium uppercase tracking-wider">or sign in
+                    <div class="grow border-t border-[#dbe0e6] dark:border-gray-700"></div>
+                    <span class="shrink mx-4 text-gray-400 text-xs font-medium uppercase tracking-wider">or sign in
                         with email</span>
-                    <div class="flex-grow border-t border-[#dbe0e6] dark:border-gray-700"></div>
+                    <div class="grow border-t border-[#dbe0e6] dark:border-gray-700"></div>
                 </div>
                 <!-- Form Fields -->
-                <form class="flex flex-col gap-5">
-                    <div class="flex flex-col">
-                        <label class="text-[#111418] dark:text-gray-200 text-sm font-semibold pb-2">Email Address</label>
-                        <input
-                            class="form-input flex w-full rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-primary h-12 placeholder:text-gray-400 p-4 text-base font-normal"
-                            placeholder="michaelsmith@example.com" type="email" value="" />
-                    </div>
-                    <div class="flex flex-col">
-                        <div class="flex justify-between items-center pb-2">
-                            <label class="text-[#111418] dark:text-gray-200 text-sm font-semibold">Password</label>
-                            <a class="text-primary text-xs font-bold hover:underline" href="#">Forgot Password?</a>
-                        </div>
-                        <div class="relative flex w-full items-stretch">
+                <x-web.form-wrapper action="{{ route('web.auth.login') }}">
+                    <div class="flex flex-col gap-5">
+                        <div class="flex flex-col">
+                            <label class="text-[#111418] dark:text-gray-200 text-sm font-semibold pb-2">Email
+                                Address</label>
                             <input
-                                class="form-input flex w-full rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-primary h-12 placeholder:text-gray-400 p-4 pr-12 text-base font-normal"
-                                placeholder="Enter your password" type="password" value="" />
-                            <button
-                                class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
-                                type="button">
-                                <span class="material-symbols-outlined text-[20px]">visibility</span>
-                            </button>
+                                class="form-input flex w-full rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-primary h-12 placeholder:text-gray-400 p-4 text-base font-normal"
+                                placeholder="michaelsmith@example.com" type="email" name="email"
+                                value="{{ old('email') }}" />
+                            @error('email')
+                                <span class="text-red-600 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
+                        <div class="flex flex-col">
+                            <div class="flex justify-between items-center pb-2">
+                                <label class="text-[#111418] dark:text-gray-200 text-sm font-semibold">Password</label>
+                                <a class="text-primary text-xs font-bold hover:underline" href="#">Forgot
+                                    Password?</a>
+                            </div>
+                            <div class="relative flex w-full items-stretch">
+                                <input id="login-password"
+                                    class="form-input flex w-full rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-primary h-12 placeholder:text-gray-400 p-4 pr-12 text-base font-normal"
+                                    placeholder="Enter your password" type="password" name="password" />
+
+                                <button onclick="toggleLoginPassword()"
+                                    class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                                    type="button">
+                                    <span id="password-icon"
+                                        class="material-symbols-outlined text-[20px] select-none">visibility</span>
+                                </button>
+                            </div>
+                            @error('password')
+                                <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="flex items-center gap-2 mt-1">
+                            <input class="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary" id="remember"
+                                type="checkbox" />
+                            <label class="text-sm text-gray-600 dark:text-gray-400" for="remember">Remember me for 30
+                                days</label>
+                        </div>
+                        <button
+                            class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-blue-700 transition-colors mt-4"
+                            type="submit">
+                            <span class="truncate">Sign In</span>
+                        </button>
                     </div>
-                    <div class="flex items-center gap-2 mt-1">
-                        <input class="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary" id="remember"
-                            type="checkbox" />
-                        <label class="text-sm text-gray-600 dark:text-gray-400" for="remember">Remember me for 30
-                            days</label>
-                    </div>
-                    <button
-                        class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-blue-700 transition-colors mt-4"
-                        type="submit">
-                        <span class="truncate">Sign In</span>
-                    </button>
-                </form>
+                </x-web.form-wrapper>
                 <div class="mt-8 text-center">
                     <p class="text-sm text-gray-600 dark:text-gray-400 font-medium">
                         Don't have an account?
@@ -127,3 +140,20 @@
         </div>
     </main>
 @endsection
+
+@push('scripts')
+    <script>
+        function toggleLoginPassword() {
+            const passwordInput = document.getElementById('login-password');
+            const icon = document.getElementById('password-icon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                passwordInput.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+    </script>
+@endpush
