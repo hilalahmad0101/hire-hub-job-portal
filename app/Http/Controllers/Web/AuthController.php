@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\ChangeEmailRequest;
 use App\Http\Requests\Auth\EmailVerifyRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\AuthService;
@@ -37,7 +38,7 @@ class AuthController extends Controller
 
     }
 
-    public function login(): View
+    public function loginView(): View
     {
         return view('web.auth.login');
     }
@@ -66,6 +67,35 @@ class AuthController extends Controller
             DB::commit();
 
             return to_route('web.auth.login.view')->with('success', 'Email verified successfully');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function resendOtp(string $uuid)
+    {
+        try {
+            $user = $this->authService->getUserByUuid($uuid);
+            $this->authService->sendOtp($user);
+
+            return back()->with('success', 'OTP sent successfully');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function changeEmail(ChangeEmailRequest $request, string $uuid)
+    {
+        $validated = $request->validated();
+        try {
+            $user = $this->authService->getUserByUuid($uuid);
+            $rand = rand(1000, 9999);
+            $user->email = $validated['email'];
+            $user->code = $rand;
+            $user->save();
+            $this->authService->sendOtp($user);
+
+            return back()->with('success', 'Email changed successfully');
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
         }

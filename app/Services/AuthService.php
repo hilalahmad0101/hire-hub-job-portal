@@ -30,6 +30,8 @@ class AuthService
             'code' => $user->code,
         ];
 
+        $user->isVerified = 0;
+        $user->save();
         Mail::to($user->email)->send(new UserVerification($details));
 
         return true;
@@ -37,7 +39,7 @@ class AuthService
 
     public function getUserByEmail(string $email): User
     {
-        return User::whereEmail($email)->first();
+        return User::whereEmail($email)->firstOrFail();
     }
 
     public function verifyEmail(User $user, int $code): bool
@@ -54,6 +56,6 @@ class AuthService
 
     public function getUserByUuid(string $uuid): User
     {
-        return User::where('uuid', '=', $uuid)->first();
+        return User::where('uuid', '=', $uuid)->firstOrFail();
     }
 }

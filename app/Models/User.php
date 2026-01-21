@@ -24,6 +24,7 @@ class User extends Authenticatable
         'isVerified',
         'code',
         'user_type',
+        'uuid',
     ];
 
     /**

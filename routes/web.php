@@ -39,6 +39,8 @@ Route::middleware(['web'])->name('web.')->group(function (): void {
         Route::get('auth/login', 'loginView')->name('auth.login.view');
         Route::get('auth/verify/{uuid}', 'verifyView')->name('auth.verify.view');
         Route::post('auth/verify', 'verifyEmail')->name('auth.verify');
+        Route::post('auth/resend/otp/{uuid}', 'resendOtp')->name('auth.resend.otp');
+        Route::post('auth/change/email/{uuid}', 'changeEmail')->name('auth.change.email');
     });
 
     Route::controller(DashboardController::class)->group(function (): void {
