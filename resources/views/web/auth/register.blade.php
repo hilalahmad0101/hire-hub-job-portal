@@ -67,24 +67,28 @@
                         <div class="flex flex-col gap-1.5">
                             <label class="text-sm font-medium text-[#111118] dark:text-gray-200">Password</label>
                             <div class="relative">
-                                <input name="password"
+                                <input name="password" id="password"
                                     class="w-full rounded-lg border border-[#dbdbe6] dark:border-gray-700 bg-white dark:bg-gray-800 p-3.5 text-base text-[#111118] dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                                     placeholder="••••••••" type="password" />
-                                <span
-                                    class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#616189] cursor-pointer text-xl">visibility</span>
+                                <span onclick="togglePassword('password', this)"
+                                    class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#616189] cursor-pointer text-xl select-none">
+                                    visibility
+                                </span>
                             </div>
                             @error('password')
-                                <span class="text-red-500">{{ $message }}</span>
+                                <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="flex flex-col gap-1.5">
                             <label class="text-sm font-medium text-[#111118] dark:text-gray-200">Confirm Password</label>
                             <div class="relative">
-                                <input name="password_confirmation"
+                                <input name="password_confirmation" id="password_confirmation"
                                     class="w-full rounded-lg border border-[#dbdbe6] dark:border-gray-700 bg-white dark:bg-gray-800 p-3.5 text-base text-[#111118] dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                                     placeholder="••••••••" type="password" />
-                                <span
-                                    class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#616189] cursor-pointer text-xl">visibility</span>
+                                <span onclick="togglePassword('password_confirmation', this)"
+                                    class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#616189] cursor-pointer text-xl select-none">
+                                    visibility
+                                </span>
                             </div>
                             @error('password_confirmation')
                                 <span class="text-red-500">{{ $message }}</span>
@@ -133,7 +137,7 @@
                     <!-- Footer Link -->
                     <p class="text-center text-sm text-[#616189] dark:text-gray-400 pt-4">
                         Already have an account? <a class="text-primary font-bold hover:underline"
-                            href="{{ route('web.auth.login') }}">Log In</a>
+                            href="{{ route('web.auth.login.view') }}">Log In</a>
                     </p>
                 </form>
             </div>
@@ -181,3 +185,19 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        function togglePassword(inputId, icon) {
+            const passwordInput = document.getElementById(inputId);
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.textContent = 'visibility_off'; // Changes icon to "hidden"
+            } else {
+                passwordInput.type = 'password';
+                icon.textContent = 'visibility'; // Changes icon back to "eye"
+            }
+        }
+    </script>
+@endpush

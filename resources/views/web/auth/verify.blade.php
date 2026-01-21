@@ -1,7 +1,7 @@
 @extends('layouts.web.guest')
 
 @section('title', 'Verification')
-
+{{-- all the code is in description --}}
 @push('styles')
     <style>
         /* Chrome, Safari, Edge, Opera */
@@ -21,8 +21,8 @@
 @section('content')
     <!-- Main Content Area -->
     <main class="flex-1 flex items-center justify-center p-6">
-        <div
-            class="max-w-[480px] w-full bg-white dark:bg-background-dark/50 border border-gray-100 dark:border-gray-800 rounded-xl shadow-sm p-8 flex flex-col items-center">
+        <form method="post" action="{{ route('web.auth.verify') }}"
+            class="max-w-120 w-full bg-white dark:bg-background-dark/50 border border-gray-100 dark:border-gray-800 rounded-xl shadow-sm p-8 flex flex-col items-center">
             <!-- Email Icon Illustration -->
             <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                 <span class="material-symbols-outlined text-primary text-4xl">mark_email_unread</span>
@@ -34,8 +34,8 @@
             </h1>
             <!-- BodyText Component -->
             <p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed text-center pb-8">
-                We've sent a 6-digit verification code to <span
-                    class="font-semibold text-[#111418] dark:text-white">alex.smith@example.com</span>. Please enter it below
+                We've sent a 4-digit verification code to <span
+                    class="font-semibold text-[#111418] dark:text-white">{{ $user->email }}</span>. Please enter it below
                 to confirm your account.
             </p>
             <!-- ConfirmationCode Component (Customized for Dark Mode & Styling) -->
@@ -58,6 +58,9 @@
                         class="flex h-14 w-12 md:w-14 text-center [appearance:textfield] focus:outline-0 focus:ring-2 focus:ring-primary/20 border-0 border-b-2 border-gray-200 dark:border-gray-700 bg-transparent dark:text-white text-2xl font-bold leading-normal transition-all focus:border-primary"
                         max="9" maxlength="1" min="0" type="number" />
                 </fieldset>
+                {{-- added this hidden filed to combine the code --}}
+                <input type="hidden" id="code" name="code">
+                <input type="hidden" name="email" value="{{ $user->email }}">
             </div>
             <!-- Action Button -->
             <button
@@ -84,22 +87,22 @@
                     </a>
                 </div>
             </div>
-        </div>
+            </fo>
     </main>
 @endsection
 
 @push('scripts')
     <script>
         const inputs = document.querySelectorAll('input[type="number"]');
-
+        const hiddenInput = document.getElementById('code');
         inputs.forEach((input, index) => {
-            // Handle typing a number
             input.addEventListener('input', (e) => {
                 if (e.target.value.length === 1 && index < inputs.length - 1) {
                     inputs[index + 1].focus();
                 }
-            });
 
+                combineValues();
+            });
             // Handle Backspace
             input.addEventListener('keydown', (e) => {
                 if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
@@ -107,5 +110,13 @@
                 }
             });
         });
+
+        function combineValues() {
+            let fullCode = "";
+            inputs.forEach(input => {
+                fullCode += input.value;
+            });
+            hiddenInput.value = fullCode;
+        }
     </script>
 @endpush

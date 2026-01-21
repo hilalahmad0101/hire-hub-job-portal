@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('code')->default(0);
             $table->boolean('isVerified')->default(0);
             $table->string('user_type')->default('candidate');
+            $table->uuid('uuid')->unique();
             $table->rememberToken();
             $table->timestamps();
         });
