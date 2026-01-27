@@ -101,45 +101,33 @@
                             type="checkbox" />
                         <label class="text-sm text-[#616189] dark:text-gray-400 leading-tight" for="terms">
                             By creating an account, I agree to the <a class="text-primary font-semibold hover:underline"
-                                href="#">Terms and Conditions</a> and <a
-                                class="text-primary font-semibold hover:underline" href="#">Privacy Policy</a>.
+                                href="#">Terms and Conditions</a> and <a class="text-primary font-semibold hover:underline"
+                                href="#">Privacy Policy</a>.
                         </label>
                     </div>
                     <!-- CTA Button -->
-                    <button
+                    <button data-loading data-loading-text="Creating Account..."
                         class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg transition-colors shadow-lg shadow-primary/20"
                         type="submit">
                         Create Account
                     </button>
+
+                </form>
+                <div class=" space-y-5">
                     <!-- Divider -->
-                    <div class="relative flex items-center py-4">
+                    <div class="relative flex items-center pt-4 ">
                         <div class="grow border-t border-[#dbdbe6] dark:border-gray-700"></div>
                         <span class="shrink mx-4 text-sm text-[#616189] dark:text-gray-400">or sign up with</span>
                         <div class="grow border-t border-[#dbdbe6] dark:border-gray-700"></div>
                     </div>
                     <!-- Social Buttons -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <button
-                            class="flex items-center justify-center gap-2 rounded-lg border border-[#dbdbe6] dark:border-gray-700 p-3 text-sm font-semibold text-[#111118] dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-                            type="button">
-                            <img alt="Google Logo" class="size-4" data-alt="Google company logo icon"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDFwcst8gaoD-s_e2n-7Gw0pyxkXcHmiMgCDEqKQPZdrEMig5wC662--SZFL7Nv-zhJhSj_UMIzFx855GxcBX4qCmq_kQHb1BJgzJdVEbhHgiNCB9sT2ANXRNVbVqjanl1is2MW9gIHysq0a6kf_WDT3a-lgBTzwiEz5gsp-j1eAgv-Q-JZWE5v84tePbDMuslmmem7LmSyCoSm7Fj122mrsc4rX9qQO03oicslSsE42NX_MpFoin5jHYAPgs14jvUQs7EIJQyXuM" />
-                            Google
-                        </button>
-                        <button
-                            class="flex items-center justify-center gap-2 rounded-lg border border-[#dbdbe6] dark:border-gray-700 p-3 text-sm font-semibold text-[#111118] dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-                            type="button">
-                            <img alt="LinkedIn Logo" class="size-4" data-alt="LinkedIn company logo icon"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeWi2l7tkon3T0GLp_q3Gb7tgtyeTA38P_zWYTcQZiQnVeJiv2_uHrak3dOKJ7tT-Rk18CvD_SAG4XyNMBuo7ljg14z5FlhxDbrqEr7voTa1g8VLJtThOQjh0QVjyMk0y-q5T4kzinMINiP4CuawuJEsno3eYBNraA35P6CLM_VPjHNpc7SlUI0GWN1vCOBxNQhBklGbWzg-iyJBrylhIm59lhipjwtCAjzMJ9aK-NloaHQUNIECc40Rd6XO_qQ9UUvHFPGKYa2fU" />
-                            LinkedIn
-                        </button>
-                    </div>
+                    <x-web.google-button />
                     <!-- Footer Link -->
                     <p class="text-center text-sm text-[#616189] dark:text-gray-400 pt-4">
                         Already have an account? <a class="text-primary font-bold hover:underline"
                             href="{{ route('web.auth.login.view') }}">Log In</a>
                     </p>
-                </form>
+                </div>
             </div>
         </div>
         <!-- Right Side: Marketing Visual -->

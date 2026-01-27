@@ -89,102 +89,244 @@
             </div>
         </div>
         <div class="max-w-[1280px] mx-auto px-6 flex gap-10 py-10 w-full">
-            <aside class="w-72 hidden lg:block flex-shrink-0">
-                <div class="sticky top-28">
-                    <div class="flex items-center justify-between mb-8">
-                        <h3 class="font-bold text-slate-custom dark:text-white">Filters</h3>
-                        <button class="text-xs font-bold text-accent dark:text-accent uppercase tracking-wider">Reset
-                            all</button>
-                    </div>
-                    <div class="filter-section">
-                        <h4 class="text-xs font-800 uppercase tracking-[0.1em] text-slate-400 dark:text-gray-500 mb-5">
-                            Employment Type</h4>
-                        <div class="space-y-4">
-                            <label class="flex items-center justify-between cursor-pointer group">
-                                <div class="flex items-center gap-3">
-                                    <input checked="" class="custom-checkbox" type="checkbox" />
-                                    <span
-                                        class="text-sm font-medium text-slate-600 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Full-time</span>
-                                </div>
-                                <span
-                                    class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 dark:bg-gray-700 text-slate-500 dark:text-gray-400 rounded-full">124</span>
-                            </label>
-                            <label class="flex items-center justify-between cursor-pointer group">
-                                <div class="flex items-center gap-3">
-                                    <input class="custom-checkbox" type="checkbox" />
-                                    <span
-                                        class="text-sm font-medium text-slate-600 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Contract</span>
-                                </div>
-                                <span
-                                    class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 dark:bg-gray-700 text-slate-500 dark:text-gray-400 rounded-full">42</span>
-                            </label>
-                            <label class="flex items-center justify-between cursor-pointer group">
-                                <div class="flex items-center gap-3">
-                                    <input class="custom-checkbox" type="checkbox" />
-                                    <span
-                                        class="text-sm font-medium text-slate-600 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Freelance</span>
-                                </div>
-                                <span
-                                    class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 dark:bg-gray-700 text-slate-500 dark:text-gray-400 rounded-full">18</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="filter-section">
-                        <h4 class="text-xs font-800 uppercase tracking-[0.1em] text-slate-400 dark:text-gray-500 mb-6">
-                            Salary Range (Annual)
-                        </h4>
-                        <div class="px-1">
-                            <input class="w-full cursor-pointer" max="300" min="50" step="5" type="range"
-                                value="120" />
-                            <div class="flex justify-between mt-5">
-                                <div class="text-center">
-                                    <p class="text-[10px] text-slate-400 dark:text-gray-500 font-bold uppercase">Min</p>
-                                    <p class="text-sm font-bold text-slate-700 dark:text-gray-300">$50k</p>
-                                </div>
-                                <div class="text-center">
-                                    <p class="text-[10px] text-slate-400 dark:text-gray-500 font-bold uppercase">Current</p>
-                                    <p class="text-sm font-bold text-accent dark:text-accent">$120k+</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="filter-section">
-                        <h4 class="text-xs font-800 uppercase tracking-[0.1em] text-slate-400 dark:text-gray-500 mb-5">
-                            Seniority</h4>
-                        <div class="space-y-4">
-                            <label class="flex items-center gap-3 cursor-pointer group">
-                                <input class="custom-radio" name="exp" type="radio" />
-                                <span
-                                    class="text-sm font-medium text-slate-600 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white">Junior
-                                    Level</span>
-                            </label>
-                            <label class="flex items-center gap-3 cursor-pointer group">
-                                <input checked="" class="custom-radio" name="exp" type="radio" />
-                                <span
-                                    class="text-sm font-medium text-slate-600 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white">Mid-Senior</span>
-                            </label>
-                            <label class="flex items-center gap-3 cursor-pointer group">
-                                <input class="custom-radio" name="exp" type="radio" />
-                                <span
-                                    class="text-sm font-medium text-slate-600 dark:text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white">Director
-                                    /
-                                    Executive</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="filter-section">
-                        <h4 class="text-xs font-800 uppercase tracking-[0.1em] text-slate-400 dark:text-gray-500 mb-5">Work
-                            Mode</h4>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button
-                                class="px-3 py-2 rounded-lg border-2 border-accent bg-indigo-50 dark:bg-indigo-900/30 text-accent text-xs font-bold transition-all">Remote</button>
-                            <button
-                                class="px-3 py-2 rounded-lg border-2 border-slate-100 dark:border-gray-700 text-slate-500 dark:text-gray-400 text-xs font-bold hover:border-slate-200 dark:hover:border-gray-600 transition-all">Hybrid</button>
-                            <button
-                                class="px-3 py-2 rounded-lg border-2 border-slate-100 dark:border-gray-700 text-slate-500 dark:text-gray-400 text-xs font-bold hover:border-slate-200 dark:hover:border-gray-600 transition-all">On-site</button>
-                        </div>
+           <aside class="w-full lg:w-80 flex flex-col gap-6">
+                <!-- Search Box -->
+                <div
+                    class="bg-white dark:bg-[#1a202c] p-5 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm">
+                    <div class="relative">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">search</span>
+                        <input
+                            class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg py-3 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary placeholder:text-gray-500 dark:text-white"
+                            placeholder="Search jobs, companies..." type="text" />
                     </div>
                 </div>
+
+                <!-- Filter by Category -->
+                <div
+                    class="bg-white dark:bg-[#1a202c] p-5 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-[#111418] dark:text-white text-sm font-bold">Category</h3>
+                        <button class="text-xs text-primary hover:underline font-medium">Clear all</button>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input checked class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
+                                type="checkbox" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">Engineering</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">24</span>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
+                                type="checkbox" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">Design</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">12</span>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
+                                type="checkbox" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">Product</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">8</span>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
+                                type="checkbox" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">Marketing</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">15</span>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
+                                type="checkbox" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">Sales</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">6</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Job Type -->
+                <div
+                    class="bg-white dark:bg-[#1a202c] p-5 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-[#111418] dark:text-white text-sm font-bold">Job Type</h3>
+                        <button class="text-xs text-primary hover:underline font-medium">Clear all</button>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input checked class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
+                                type="checkbox" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">Full-time</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">38</span>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
+                                type="checkbox" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">Part-time</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">8</span>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
+                                type="checkbox" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">Contract</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">12</span>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
+                                type="checkbox" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">Remote</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">22</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Salary Range -->
+                <div
+                    class="bg-white dark:bg-[#1a202c] p-5 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-[#111418] dark:text-white text-sm font-bold">Salary Range</h3>
+                        <button class="text-xs text-primary hover:underline font-medium">Clear all</button>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="border-gray-300 text-primary focus:ring-primary h-4 w-4" name="salary"
+                                type="radio" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">$0
+                                    - $80k</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">5</span>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="border-gray-300 text-primary focus:ring-primary h-4 w-4" name="salary"
+                                type="radio" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">$80k
+                                    - $120k</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">18</span>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="border-gray-300 text-primary focus:ring-primary h-4 w-4" name="salary"
+                                type="radio" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">$120k
+                                    - $160k</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">15</span>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="border-gray-300 text-primary focus:ring-primary h-4 w-4" name="salary"
+                                type="radio" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">$160k+</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">12</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Experience Level -->
+                <div
+                    class="bg-white dark:bg-[#1a202c] p-5 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-[#111418] dark:text-white text-sm font-bold">Experience Level</h3>
+                        <button class="text-xs text-primary hover:underline font-medium">Clear all</button>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
+                                type="checkbox" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">Entry
+                                    Level</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">8</span>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
+                                type="checkbox" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">Mid
+                                    Level</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">20</span>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
+                                type="checkbox" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">Senior
+                                    Level</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">25</span>
+                            </div>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            <input class="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
+                                type="checkbox" />
+                            <div class="flex-1 flex items-center justify-between">
+                                <span
+                                    class="text-sm text-[#111418] dark:text-gray-300 group-hover:text-primary transition-colors">Director/VP</span>
+                                <span class="text-xs text-gray-400 dark:text-gray-500">6</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Apply Filters Button -->
+                <button data-loading data-loading-text="Applying..."
+                    class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-lg transition-colors shadow-lg shadow-primary/20">
+                    Apply Filters
+                </button>
             </aside>
             <div class="flex-1 flex flex-col gap-8">
                 <div

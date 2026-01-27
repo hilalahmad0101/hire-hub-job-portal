@@ -40,7 +40,8 @@
                     </div>
                     <div>
                         <h1 class="text-slate-900 dark:text-white text-base font-bold leading-none">
-                            {{ env('APP_NAME') }}</h1>
+                            {{ env('APP_NAME') }}
+                        </h1>
                         <p class="text-slate-500 dark:text-slate-400 text-xs mt-1">Recruitment Portal</p>
                     </div>
                 </div>
@@ -156,6 +157,29 @@
             </div>
         </main>
     </div>
+
+    <div class="fixed top-6 right-6 z-[100] flex flex-col gap-4 w-full max-w-sm pointer-events-none">
+
+        {{-- 1. Success Message --}}
+        @if (session('success'))
+            <x-toast-alert type="success" :message="session('success')" title="Success!" icon="check_circle"
+                color="green" />
+        @endif
+
+        {{-- 2. Single Manual Error Message --}}
+        @if (session('error'))
+            <x-toast-alert type="error" :message="session('error')" title="Error Occurred" icon="warning" color="red" />
+        @endif
+
+        {{-- 3. Loop through all Validation Errors --}}
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <x-toast-alert type="error" :message="$error" title="Validation Error" icon="error" color="red" />
+            @endforeach
+        @endif
+    </div>
+
+    @stack('scripts')
 </body>
 
 </html>

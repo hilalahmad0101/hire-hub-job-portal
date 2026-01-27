@@ -82,4 +82,37 @@ class AuthService
             'user' => $user,
         ];
     }
+
+    public function findOrCreateGoogleUser($googleUser): User
+    {
+        // Check if user exists with this Google ID
+        $user = User::where('google_id', $googleUser->getId())->first();
+
+        if ($user) {
+            return $user;
+        }
+
+        // Check if user exists with this email
+        $user = User::where('email', $googleUser->getEmail())->first();
+
+        if ($user) {
+            // Link Google account to existing user
+            $user->google_id = $googleUser->getId();
+            $user->save();
+
+            return $user;
+        }
+
+        // Create new user from Google data
+        return User::create([
+            'name' => $googleUser->getName(),
+            'email' => $googleUser->getEmail(),
+            'google_id' => $googleUser->getId(),
+            'user_type' => 'candidate', // Default to candidate
+            'isVerified' => 1, // Google accounts are pre-verified
+            'code' => 0,
+            'uuid' => str()->uuid(),
+            'password' => bcrypt(str()->random(32)), // Random password
+        ]);
+    }
 }

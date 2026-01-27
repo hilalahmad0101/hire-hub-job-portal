@@ -201,4 +201,36 @@ class AuthController extends Controller
 
         return to_route('web.auth.login.view');
     }
+
+    // Google OAuth Methods
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->user();
+
+            // Find or create user
+            $user = $this->authService->findOrCreateGoogleUser($googleUser);
+
+            Auth::login($user);
+
+            // Redirect based on user type
+            if ($user->user_type == 'employer') {
+                if ($user->is_task_complete) {
+                    return to_route('web.employer.dashboard')->with('success', 'Welcome back!');
+                } else {
+                    return to_route('web.setup-company.view', ['uuid' => $user->uuid])->with('success', 'Complete your company profile');
+                }
+            }
+
+            return to_route('web.home')->with('success', 'Welcome back!');
+
+        } catch (\Throwable $th) {
+            return to_route('web.auth.login.view')->with('error', 'Google login failed. Please try again.');
+        }
+    }
 }

@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -40,7 +40,8 @@
                     </div>
                     <h2
                         class="text-[#111418] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] font-display">
-                        {{ env('APP_NAME') }}</h2>
+                        {{ env('APP_NAME') }}
+                    </h2>
                 </div>
                 <div class="hidden md:flex flex-1 justify-center gap-8">
                     <nav class="flex items-center gap-9">
@@ -157,15 +158,13 @@
 
             {{-- 2. Single Manual Error Message --}}
             @if (session('error'))
-                <x-toast-alert type="error" :message="session('error')" title="Error Occurred" icon="warning"
-                    color="red" />
+                <x-toast-alert type="error" :message="session('error')" title="Error Occurred" icon="warning" color="red" />
             @endif
 
             {{-- 3. Loop through all Validation Errors --}}
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
-                    <x-toast-alert type="error" :message="$error" title="Validation Error" icon="error"
-                        color="red" />
+                    <x-toast-alert type="error" :message="$error" title="Validation Error" icon="error" color="red" />
                 @endforeach
             @endif
         </div>
